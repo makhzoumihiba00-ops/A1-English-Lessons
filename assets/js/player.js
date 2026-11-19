@@ -537,6 +537,25 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
       </div>
       <div></div>
     `;
+  } else if (slide.type === "video") {
+    canvas.innerHTML = `
+      <div>
+        <div class="slide-header-bar">
+          <span class="slide-tag">🎬 Video Dialogue</span>
+          <span class="badge-lime">+10 XP</span>
+        </div>
+        <h2 class="slide-title">${slide.title}</h2>
+        <p class="slide-subtitle">${slide.subtitle}</p>
+        <div style="border-radius:18px;overflow:hidden;border:2px solid var(--border-color);background:#000;box-shadow:var(--shadow-md);">
+          <video controls playsinline style="width:100%;max-height:330px;display:block;" poster="${slide.poster || ''}">
+            <source src="${slide.videoUrl}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        ${slide.transcript ? `<div class="feedback-banner success" style="margin-top:12px;">💬 ${slide.transcript}</div>` : ""}
+      </div>
+      <div></div>
+    `;
   } else if (slide.type === "dialogue") {
     const fullDialogue = slide.lines.map((l) => `${l.speaker}: ${l.text}`).join(" ");
     canvas.innerHTML = `

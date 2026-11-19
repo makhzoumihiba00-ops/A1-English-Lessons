@@ -140,17 +140,13 @@ const SLIDES_BY_LESSON = {
       ],
       tip: "Use 'he' for male family members (father, brother, uncle) and 'she' for female family members (mother, sister, aunt)."
     },
-    {
+   {
       id: "2-5",
-      type: "dialogue",
+      type: "video",
       title: "Looking at a Family Photo",
-      subtitle: "Read and listen to Maya talking about her family photo.",
-      lines: [
-        { speaker: "Noah", text: "Who is this in the photo, Maya?" },
-        { speaker: "Maya", text: "This is my mother, and this is my father." },
-        { speaker: "Noah", text: "Do you have any brothers or sisters?" },
-        { speaker: "Maya", text: "Yes! I have one brother and one sister." }
-      ]
+      subtitle: "Watch Noah and Maya talking about Maya's family photo.",
+      videoUrl: "../assets/videos/lesson2-family.mp4.mp4",
+      transcript: "Noah: Who is this in the photo, Maya? — Maya: This is my mother, and this is my father. I have one brother and one sister."
     },
     {
       id: "2-6",
