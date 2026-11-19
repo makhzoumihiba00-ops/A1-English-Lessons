@@ -106,7 +106,7 @@ const SLIDES_BY_LESSON = {
       type: "imageDialogue",
       title: "My Family Tree",
       subtitle: "Look at the family tree, listen, and read the explanation.",
-      imageUrl: "../assets/images/lesson2-family-tree.png",
+      imageUrl: "../assets/images/lesson2-family-tree.png.png",
       lines: [
         { speaker: "Friend", text: "Who is in your family tree?" },
         { speaker: "Adam", text: "At the top are my grandfather and grandmother (my grandparents)." },
@@ -203,7 +203,7 @@ const SLIDES_BY_LESSON = {
     type: "imageDialogue",
     title: "Welcome to My House!",
     subtitle: "Listen to Adam showing his house, rooms, and objects to Sara.",
-    imageUrl: "../assets/images/lesson3-house-tree.jfif",
+    imageUrl: "../assets/images/lesson3-house-tree.png.png",
     lines: [
       { speaker: "Sara", text: "Your house is very nice, Adam! What are the rooms?" },
       { speaker: "Adam", text: "Thanks! Here is the living room with a sofa and a TV, and next to it is the kitchen with a table." },
@@ -216,7 +216,7 @@ const SLIDES_BY_LESSON = {
     type: "imageDialogue",
     title: "My Daily Routine",
     subtitle: "Listen to Adam talking about what he does every day.",
-    imageUrl: "../assets/images/lesson3-routine-tree.jfif",
+    imageUrl: "../assets/images/lesson3-routine-tree.png.png",
     lines: [
       { speaker: "Sara", text: "What is your daily routine, Adam?" },
       { speaker: "Adam", text: "In the morning, I wake up at 7 o'clock and wash my face in the bathroom,Then, I eat breakfast in the kitchen and go to school" },
@@ -245,7 +245,7 @@ const SLIDES_BY_LESSON = {
       type: "imageDialogue",
       title: "My Daily Routine",
       subtitle: "Listen to Samandra describe her typical weekday.",
-      imageUrl: "../assets/images/lesson3-samandra-routine.jfif",
+      imageUrl: "../assets/images/lesson3-samandra-routine.png.png",
       lines: [
         { speaker: "Samandra", text: "I wake up at 7 o'clock in the morning." },
         { speaker: "Samandra", text: "I eat breakfast in the kitchen at 7:30." },
@@ -313,7 +313,7 @@ const SLIDES_BY_LESSON = {
       type: "imageDialogue",
       title: "At the Clothing Store",
       subtitle: "Look at the clothes in the shop, listen, and read the conversation.",
-      imageUrl: "../assets/images/lesson4-clothes-store.jfif",
+      imageUrl: "../assets/images/lesson4-clothes-store.png.png",
       lines: [
         { speaker: "Samandra", text: "Look at this store! There are so many nice clothes." },
         { speaker: "Adam", text: "Yes! On the rack, I see a T-shirt, a blue shirt, a warm sweater, a jacket, and a green dress." },
