@@ -308,34 +308,22 @@ const SLIDES_BY_LESSON = {
       type: "intro",
       title: "Lesson Introduction"
     },
-    {
+  {
       id: "4-2",
-      type: "vocabulary",
-      title: "Tops & Outerwear",
-      subtitle: "Learn five common clothing items for the upper body.",
-      items: [
-        { emoji: "👕", word: "T-shirt", example: "I'm wearing a white T-shirt." },
-        { emoji: "👔", word: "Shirt", example: "He wears a blue shirt to work." },
-        { emoji: "🧥", word: "Jacket", example: "Take your jacket; it's cold!" },
-        { emoji: "🧶", word: "Sweater", example: "She has a warm red sweater." },
-        { emoji: "👗", word: "Dress", example: "That green dress is very nice." }
+      type: "imageDialogue",
+      title: "At the Clothing Store",
+      subtitle: "Look at the clothes in the shop, listen, and read the conversation.",
+      imageUrl: "../assets/images/lesson4-clothes-store.jfif",
+      lines: [
+        { speaker: "Samandra", text: "Look at this store! There are so many nice clothes." },
+        { speaker: "Adam", text: "Yes! On the rack, I see a T-shirt, a blue shirt, a warm sweater, a jacket, and a green dress." },
+        { speaker: "Samandra", text: "And down here, there are jeans, a skirt, sneakers, shoes, and a hat!" },
+        { speaker: "Adam", text: "Let's buy a jacket and new sneakers!" }
       ]
     },
+   
     {
       id: "4-3",
-      type: "vocabulary",
-      title: "Bottoms, Shoes & Accessories",
-      subtitle: "Learn five more everyday clothing words.",
-      items: [
-        { emoji: "👖", word: "Jeans / Pants", example: "I like wearing blue jeans." },
-        { emoji: "🩳", word: "Shorts", example: "We wear shorts in summer." },
-        { emoji: "👟", word: "Shoes / Sneakers", example: "My new sneakers are black." },
-        { emoji: "🧦", word: "Socks", example: "I need a pair of clean socks." },
-        { emoji: "🧢", word: "Hat / Cap", example: "He is wearing a yellow cap." }
-      ]
-    },
-    {
-      id: "4-4",
       type: "grammar",
       title: "Colors + Clothes & 'Wearing'",
       subtitle: "In English, the color comes BEFORE the clothing word.",
@@ -348,20 +336,9 @@ const SLIDES_BY_LESSON = {
       ],
       tip: "Never say 'a T-shirt red'. Always put the color first: 'a red T-shirt'!"
     },
+   
     {
-      id: "4-5",
-      type: "dialogue",
-      title: "What Are You Wearing?",
-      subtitle: "Listen to Lina and Youssef talking about their outfits.",
-      lines: [
-        { speaker: "Lina", text: "Hi Youssef! I like your blue jacket." },
-        { speaker: "Youssef", text: "Thanks, Lina! I'm wearing it with black jeans and white sneakers." },
-        { speaker: "Lina", text: "I'm wearing a yellow T-shirt and a gray skirt today." },
-        { speaker: "Youssef", text: "Yellow is a great color for sunny weather!" }
-      ]
-    },
-    {
-      id: "4-6",
+      id: "4-4",
       type: "activity",
       activityType: "listening",
       title: "Listening: Identify the Outfit",
@@ -382,7 +359,7 @@ const SLIDES_BY_LESSON = {
       ]
     },
     {
-      id: "4-7",
+      id: "4-5",
       type: "activity",
       activityType: "sentenceBuilder",
       title: "Describe the Outfit",
@@ -401,7 +378,7 @@ const SLIDES_BY_LESSON = {
       ]
     },
     {
-      id: "4-8",
+      id: "4-6",
       type: "completion",
       title: "Lesson Completed",
       message: "Fantastic! You can now name clothes, use colors, and describe what people are wearing."
