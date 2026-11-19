@@ -536,7 +536,76 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
         </div>
       </div>
       <div></div>
+    `;} else if (slide.type === "imageDialogue") {
+    const dialogueLines = slide.lines || [];
+    const fullAudio = dialogueLines.map((l) => l.text).join(" ");
+    canvas.innerHTML = `
+      <div>
+    
+        <h2 class="slide-title">${slide.title}</h2>
+        <p class="slide-subtitle">${slide.subtitle}</p>
+      <div style="width:fit-content;max-width:100%;margin:20px auto;border-radius:18px;overflow:hidden;border:2px solid var(--border-color);box-shadow:var(--shadow-md);line-height:0;">
+          <img src="${slide.imageUrl}" alt="${escapeAttr(slide.title)}" style="width:auto;max-width:100%;height:auto;max-height:53vh;object-fit:contain;display:block;" />
+        </div>
+        <div style="margin-top:18px;display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;">
+          ${
+            fullAudio
+              ? `<button class="audio-btn" id="playSceneAudioBtn" data-speak="${escapeAttr(fullAudio)}" style="padding:10px 20px;font-size:0.95rem;">🔊 Listen to Scene</button>`
+              : ""
+          }
+          ${
+            dialogueLines.length
+              ? `<button class="btn-primary" id="openDialogueModalBtn" style="padding:10px 22px;font-size:0.95rem;">📖 Read Dialogue</button>`
+              : ""
+          }
+        </div>
+      </div>
+      <div></div>
     `;
+
+    const playSceneBtn = document.getElementById("playSceneAudioBtn");
+    if (playSceneBtn) {
+      playSceneBtn.addEventListener("click", () => {
+        speakText(playSceneBtn.getAttribute("data-speak"), playSceneBtn);
+      });
+    }
+
+    const openDialogueBtn = document.getElementById("openDialogueModalBtn");
+    if (openDialogueBtn) {
+      openDialogueBtn.addEventListener("click", () => {
+        const modal = document.getElementById("reviewModal");
+        const modalTitle = modal.querySelector(".modal-header h3");
+        const body = document.getElementById("reviewModalBody");
+
+        modalTitle.textContent = `📖 ${slide.title} — Dialogue`;
+        body.innerHTML = `
+          <div class="dialogue-list">
+            ${dialogueLines
+              .map(
+                (line, idx) => `
+              <div class="dialogue-row ${idx % 2 === 1 ? "right" : ""}">
+                <div class="speaker-avatar">${line.speaker[0]}</div>
+                <div class="speech-bubble" style="max-width:82%;">
+                  <div class="speech-speaker">${line.speaker}</div>
+                  <div class="speech-text">${line.text}</div>
+                  <button class="audio-btn modal-speak-btn" style="margin-top:8px;" data-speak="${escapeAttr(line.text)}">🔊 Listen</button>
+                </div>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        `;
+
+        body.querySelectorAll(".modal-speak-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            speakText(btn.getAttribute("data-speak"), btn);
+          });
+        });
+
+        modal.classList.remove("hidden");
+      });
+    }
   } else if (slide.type === "video") {
     const dialogueLines = slide.lines || (slide.transcript ? [{ speaker: "Dialogue", text: slide.transcript }] : []);
     canvas.innerHTML = `

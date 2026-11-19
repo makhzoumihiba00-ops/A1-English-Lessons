@@ -103,15 +103,15 @@ const SLIDES_BY_LESSON = {
     },
     {
       id: "2-2",
-      type: "vocabulary",
-      title: "Immediate Family",
-      subtitle: "Learn the words for parents, brothers, and sisters.",
-      items: [
-        { emoji: "👩", word: "Mother (Mom)", example: "This is my mother." },
-        { emoji: "👨", word: "Father (Dad)", example: "My father is a teacher." },
-        { emoji: "👦", word: "Brother", example: "I have one younger brother." },
-        { emoji: "👧", word: "Sister", example: "My sister is 15 years old." },
-        { emoji: "👨‍👩‍👧‍👦", word: "Parents", example: "My parents live in Rabat." }
+      type: "imageDialogue",
+      title: "My Family Tree",
+      subtitle: "Look at the family tree, listen, and read the explanation.",
+      imageUrl: "../assets/images/lesson2-family-tree.png",
+      lines: [
+        { speaker: "Friend", text: "Who is in your family tree?" },
+        { speaker: "Adam", text: "At the top are my grandfather and grandmother (my grandparents)." },
+        { speaker: "Adam", text: "Here are my parents: my mother and my father. I also have an uncle and an aunt." },
+        { speaker: "Adam", text: "And down here are my brother, my sister, and me!" }
       ]
     },
     {
