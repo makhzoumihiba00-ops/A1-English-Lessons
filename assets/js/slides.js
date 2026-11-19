@@ -114,20 +114,9 @@ const SLIDES_BY_LESSON = {
         { speaker: "Adam", text: "And down here are my brother, my sister, and me!" }
       ]
     },
+  
     {
       id: "2-3",
-      type: "vocabulary",
-      title: "Extended Family",
-      subtitle: "Learn more family words for grandparents, aunts, and uncles.",
-      items: [
-        { emoji: "👵", word: "Grandmother", example: "My grandmother makes great tea." },
-        { emoji: "👴", word: "Grandfather", example: "My grandfather likes reading." },
-        { emoji: "👩‍🦱", word: "Aunt", example: "My aunt lives in London." },
-        { emoji: "🧔", word: "Uncle", example: "My uncle is very funny." }
-      ]
-    },
-    {
-      id: "2-4",
       type: "grammar",
       title: "Talking About Your Family",
       subtitle: "Use 'This is my...' and 'I have...' to introduce family members.",
@@ -141,7 +130,7 @@ const SLIDES_BY_LESSON = {
       tip: "Use 'he' for male family members (father, brother, uncle) and 'she' for female family members (mother, sister, aunt)."
     },
     {
-      id: "2-5",
+      id: "2-4",
       type: "video",
       title: "Looking at a Family Photo",
       subtitle: "Watch Noah and Maya talking about Maya's family photo.",
@@ -152,7 +141,7 @@ const SLIDES_BY_LESSON = {
       ]
     },
     {
-      id: "2-6",
+      id: "2-5",
       type: "activity",
       activityType: "mcq",
       title: "Family Vocabulary Quiz",
@@ -176,7 +165,7 @@ const SLIDES_BY_LESSON = {
       ]
     },
     {
-      id: "2-7",
+      id: "2-6",
       type: "activity",
       activityType: "sentenceBuilder",
       title: "Build Family Sentences",
@@ -195,7 +184,7 @@ const SLIDES_BY_LESSON = {
       ]
     },
     {
-      id: "2-8",
+      id: "2-7",
       type: "completion",
       title: "Lesson Completed",
       message: "Awesome work! You now know key English family vocabulary and sentence patterns."
