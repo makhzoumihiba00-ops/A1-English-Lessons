@@ -1,223 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  initThemeToggle();
-
-  const params = new URLSearchParams(window.location.search);
-  let currentLessonId = parseInt(params.get("lesson"), 10) || 1;
-  if (!LESSONS_SLIDES[currentLessonId]) currentLessonId = 1;
-
-  const progressState = loadProgressState();
-  if (!progressState.lessons[currentLessonId]) {
-    progressState.lessons[currentLessonId] = { currentSlide: 0, completed: false };
-  }
-
-  const playerState = {
-    lessonId: currentLessonId,
-    slideIndex: progressState.lessons[currentLessonId].currentSlide || 0,
-    zoom: 1,
-    scores: progressState.scores || {},
-    mistakes: progressState.mistakes || {}
-  };
-
-  // Populate Lesson Switcher Dropdown
-  const lessonSelect = document.getElementById("lessonSelect");
-  lessonSelect.innerHTML = LESSONS_DATA.map(
-    (l) => `<option value="${l.id}" ${l.id === playerState.lessonId ? "selected" : ""}>${l.code}: ${l.title}</option>`
-  ).join("");
-
-  lessonSelect.addEventListener("change", (e) => {
-    switchLesson(parseInt(e.target.value, 10));
-  });
-
-  function switchLesson(newLessonId) {
-    playerState.lessonId = newLessonId;
-    const saved = loadProgressState();
-    const lessonSaved = (saved.lessons && saved.lessons[newLessonId]) || {};
-    playerState.slideIndex = lessonSaved.currentSlide || 0;
-
-    const url = new URL(window.location.href);
-    url.searchParams.set("lesson", newLessonId);
-    window.history.replaceState({}, "", url);
-
-    renderPlayer();
-  }
-
-  function persistProgress(markCompleted = false) {
-    const saved = loadProgressState();
-    if (!saved.lessons) saved.lessons = {};
-    const prev = saved.lessons[playerState.lessonId] || {};
-    saved.lessons[playerState.lessonId] = {
-      currentSlide: playerState.slideIndex,
-      completed: markCompleted || Boolean(prev.completed)
-    };
-    saved.scores = playerState.scores;
-    saved.mistakes = playerState.mistakes;
-    saveProgressState(saved);
-  }
-
-  function renderSidebar(lesson, slides) {
-    document.getElementById("headerLessonBadge").textContent = `${lesson.code} • ${lesson.title}`;
-    document.getElementById("sidebarLessonCode").textContent = lesson.code;
-    document.getElementById("sidebarLessonTitle").textContent = lesson.title;
-    lessonSelect.value = lesson.id;
-
-    const list = document.getElementById("slidesList");
-    list.innerHTML = slides
-      .map((s, idx) => {
-        const isActive = idx === playerState.slideIndex;
-        const isVisited = idx < playerState.slideIndex;
-        return `
-          <li>
-            <button type="button" class="slide-nav-item ${isActive ? "active" : ""}" data-slide-idx="${idx}">
-              <span class="slide-num-pill">${s.number}</span>
-              <span class="slide-nav-title">${s.title}</span>
-              ${isVisited ? `<span class="slide-done-check">✓</span>` : ""}
-            </button>
-          </li>`;
-      })
-      .join("");
-
-    list.querySelectorAll(".slide-nav-item").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        playerState.slideIndex = parseInt(btn.dataset.slideIdx, 10);
-        document.getElementById("slidesSidebar").classList.remove("open");
-        renderPlayer();
-      });
-    });
-  }
-
-  function renderControls(slides) {
-    const total = slides.length;
-    const current = playerState.slideIndex + 1;
-    const pct = Math.round((current / total) * 100);
-
-    document.getElementById("slideCounterText").textContent = `Slide ${current} / ${total}`;
-    document.getElementById("progressPercentText").textContent = `${pct}%`;
-    document.getElementById("progressFill").style.width = `${pct}%`;
-
-    const prevBtn = document.getElementById("prevSlideBtn");
-    const nextBtnText = document.getElementById("nextSlideBtnText");
-    prevBtn.disabled = playerState.slideIndex === 0;
-    nextBtnText.textContent = playerState.slideIndex === total - 1 ? "Finish Lesson" : "Next Slide";
-  }
-
-  function renderPlayer() {
-    const lesson = LESSONS_DATA.find((l) => l.id === playerState.lessonId) || LESSONS_DATA[0];
-    const slides = LESSONS_SLIDES[lesson.id];
-    if (playerState.slideIndex >= slides.length) playerState.slideIndex = 0;
-
-    const currentSlide = slides[playerState.slideIndex];
-    const isFinalSlide = playerState.slideIndex === slides.length - 1;
-    persistProgress(isFinalSlide);
-
-    renderSidebar(lesson, slides);
-    renderControls(slides);
-
-    const canvas = document.getElementById("slideCanvas");
-    canvas.innerHTML = renderSlideHTML(currentSlide, lesson, playerState);
-
-    mountSlideInteractions(currentSlide, lesson, {
-      goNext: () => {
-        if (playerState.slideIndex < slides.length - 1) {
-          playerState.slideIndex++;
-          renderPlayer();
-        }
-      },
-      recordQuizScore: (lessonId, correct, total, mistakes) => {
-        playerState.scores[lessonId] = { correct, total };
-        playerState.mistakes[lessonId] = mistakes;
-        persistProgress(false);
-      },
-      openMistakesModal: () => {
-        const modal = document.getElementById("reviewModal");
-        const body = document.getElementById("reviewModalBody");
-        const list = playerState.mistakes[playerState.lessonId] || [];
-        if (list.length === 0) {
-          body.innerHTML = `<p style="font-weight:700;color:var(--green-success);">🎉 No mistakes recorded in this lesson! Great job!</p>`;
-        } else {
-          body.innerHTML = list
-            .map(
-              (m) => `
-              <div class="mistake-item">
-                <strong>${m.question}</strong>
-                <div style="font-size:0.86rem;color:var(--red-accent);margin-top:4px;">Your answer: ${m.yourAnswer}</div>
-                <div style="font-size:0.86rem;color:var(--green-success);">Correct answer: ${m.correctAnswer}</div>
-                ${m.explanation ? `<div style="font-size:0.82rem;color:var(--text-muted);margin-top:4px;">${m.explanation}</div>` : ""}
-              </div>`
-            )
-            .join("");
-        }
-        modal.classList.remove("hidden");
-      }
-    });
-  }
-
-  // Navigation Buttons
-  document.getElementById("prevSlideBtn").addEventListener("click", () => {
-    if (playerState.slideIndex > 0) {
-      playerState.slideIndex--;
-      renderPlayer();
-    }
-  });
-
-  document.getElementById("nextSlideBtn").addEventListener("click", () => {
-    const slides = LESSONS_SLIDES[playerState.lessonId];
-    if (playerState.slideIndex < slides.length - 1) {
-      playerState.slideIndex++;
-      renderPlayer();
-    } else {
-      persistProgress(true);
-      window.location.href = "../index.html";
-    }
-  });
-
-  // Keyboard Arrows
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") document.getElementById("nextSlideBtn").click();
-    if (e.key === "ArrowLeft") document.getElementById("prevSlideBtn").click();
-  });
-
-  // Zoom Controls
-  const viewport = document.getElementById("slideViewport");
-  const zoomLabel = document.getElementById("zoomLevelText");
-  function applyZoom() {
-    viewport.style.transform = `scale(${playerState.zoom})`;
-    zoomLabel.textContent = `${Math.round(playerState.zoom * 100)}%`;
-  }
-  document.getElementById("zoomInBtn").addEventListener("click", () => {
-    playerState.zoom = Math.min(1.25, +(playerState.zoom + 0.1).toFixed(2));
-    applyZoom();
-  });
-  document.getElementById("zoomOutBtn").addEventListener("click", () => {
-    playerState.zoom = Math.max(0.8, +(playerState.zoom - 0.1).toFixed(2));
-    applyZoom();
-  });
-  document.getElementById("zoomResetBtn").addEventListener("click", () => {
-    playerState.zoom = 1;
-    applyZoom();
-  });
-
-  // Fullscreen Toggle
-  document.getElementById("fullscreenBtn").addEventListener("click", () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
-    } else {
-      document.exitFullscreen().catch(() => {});
-    }
-  });
-
-  // Mobile Sidebar Toggle & Modal Close
-  document.getElementById("toggleSidebarBtn").addEventListener("click", () => {
-    document.getElementById("slidesSidebar").classList.toggle("open");
-  });
-  document.getElementById("closeSidebarBtn").addEventListener("click", () => {
-    document.getElementById("slidesSidebar").classList.remove("open");
-  });
-  document.getElementById("closeReviewModal").addEventListener("click", () => {
-    document.getElementById("reviewModal").classList.add("hidden");
-  });
-
-  renderPlayer();
-});
 let currentLessonId = 1;
 let currentSlideIndex = 0;
 let zoomLevel = 100;
@@ -484,6 +264,42 @@ function speakText(text, btnEl) {
   window.speechSynthesis.speak(utterance);
 }
 
+function openDialogueModal(title, dialogueLines) {
+  const modal = document.getElementById("reviewModal");
+  const modalTitle = modal.querySelector(".modal-header h3");
+  const body = document.getElementById("reviewModalBody");
+
+  modalTitle.textContent = `📖 ${title} — Dialogue`;
+  body.innerHTML = `
+    <div class="dialogue-list" style="display:flex;flex-direction:column;gap:8px;">
+      ${dialogueLines
+        .map(
+          (line, idx) => `
+        <div class="dialogue-row ${idx % 2 === 1 ? "right" : ""}" style="gap:8px;align-items:center;">
+          <div class="speaker-avatar" style="width:28px;height:28px;font-size:0.8rem;flex-shrink:0;">${line.speaker[0]}</div>
+          <div class="speech-bubble" style="max-width:85%;padding:7px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div>
+              <div class="speech-speaker" style="font-size:0.74rem;margin-bottom:2px;">${line.speaker}</div>
+              <div class="speech-text" style="font-size:0.88rem;line-height:1.25;">${line.text}</div>
+            </div>
+            <button class="audio-btn modal-speak-btn" style="padding:4px 9px;font-size:0.75rem;flex-shrink:0;" data-speak="${escapeAttr(line.text)}">🔊</button>
+          </div>
+        </div>
+      `
+        )
+        .join("")}
+    </div>
+  `;
+
+  body.querySelectorAll(".modal-speak-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      speakText(btn.getAttribute("data-speak"), btn);
+    });
+  });
+
+  modal.classList.remove("hidden");
+}
+
 function renderCurrentSlide(slide, lessonMeta, totalSlides) {
   const canvas = document.getElementById("slideCanvas");
   canvas.style.animation = "none";
@@ -536,15 +352,51 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
         </div>
       </div>
       <div></div>
-    `;} else if (slide.type === "imageDialogue") {
+    `;
+  } else if (slide.type === "dialogue") {
+    const dialogueLines = slide.lines || [];
+    const fullDialogue = dialogueLines.map((l) => l.text).join(" ");
+    canvas.innerHTML = `
+      <div>
+        <div class="slide-header-bar" style="margin-bottom:4px;">
+          <span class="slide-tag">💬 Dialogue</span>
+          ${
+            fullDialogue
+              ? `<button class="audio-btn" style="padding:5px 12px;font-size:0.8rem;" data-speak="${escapeAttr(fullDialogue)}">🔊 Listen All</button>`
+              : `<span class="badge-lime">+10 XP</span>`
+          }
+        </div>
+        <h2 class="slide-title" style="font-size:1.35rem;margin-bottom:2px;">${slide.title}</h2>
+        <p class="slide-subtitle" style="font-size:0.86rem;margin-bottom:10px;">${slide.subtitle}</p>
+        <div class="dialogue-list" style="display:flex;flex-direction:column;gap:6px;max-width:740px;margin:0 auto;">
+          ${dialogueLines
+            .map(
+              (line, idx) => `
+            <div class="dialogue-row ${idx % 2 === 1 ? "right" : ""}" style="gap:8px;align-items:center;">
+              <div class="speaker-avatar" style="width:28px;height:28px;font-size:0.8rem;flex-shrink:0;">${line.speaker[0]}</div>
+              <div class="speech-bubble" style="padding:6px 12px;max-width:78%;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                <div>
+                  <div class="speech-speaker" style="font-size:0.74rem;margin-bottom:1px;">${line.speaker}</div>
+                  <div class="speech-text" style="font-size:0.88rem;line-height:1.25;">${line.text}</div>
+                </div>
+                <button class="audio-btn" style="padding:4px 9px;font-size:0.75rem;flex-shrink:0;" data-speak="${escapeAttr(line.text)}">🔊 Listen</button>
+              </div>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
+      </div>
+      <div></div>
+    `;
+  } else if (slide.type === "imageDialogue") {
     const dialogueLines = slide.lines || [];
     const fullAudio = dialogueLines.map((l) => l.text).join(" ");
     canvas.innerHTML = `
       <div>
-    
         <h2 class="slide-title">${slide.title}</h2>
         <p class="slide-subtitle">${slide.subtitle}</p>
-      <div style="width:fit-content;max-width:100%;margin:20px auto;border-radius:18px;overflow:hidden;border:2px solid var(--border-color);box-shadow:var(--shadow-md);line-height:0;">
+        <div style="width:fit-content;max-width:100%;margin:20px auto;border-radius:18px;overflow:hidden;border:2px solid var(--border-color);box-shadow:var(--shadow-md);line-height:0;">
           <img src="${slide.imageUrl}" alt="${escapeAttr(slide.title)}" style="width:auto;max-width:100%;height:auto;max-height:53vh;object-fit:contain;display:block;" />
         </div>
         <div style="margin-top:18px;display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;">
@@ -563,47 +415,10 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
       <div></div>
     `;
 
-    const playSceneBtn = document.getElementById("playSceneAudioBtn");
-    if (playSceneBtn) {
-      playSceneBtn.addEventListener("click", () => {
-        speakText(playSceneBtn.getAttribute("data-speak"), playSceneBtn);
-      });
-    }
-
     const openDialogueBtn = document.getElementById("openDialogueModalBtn");
     if (openDialogueBtn) {
       openDialogueBtn.addEventListener("click", () => {
-        const modal = document.getElementById("reviewModal");
-        const modalTitle = modal.querySelector(".modal-header h3");
-        const body = document.getElementById("reviewModalBody");
-
-        modalTitle.textContent = `📖 ${slide.title} — Dialogue`;
-        body.innerHTML = `
-          <div class="dialogue-list">
-            ${dialogueLines
-              .map(
-                (line, idx) => `
-              <div class="dialogue-row ${idx % 2 === 1 ? "right" : ""}">
-                <div class="speaker-avatar">${line.speaker[0]}</div>
-                <div class="speech-bubble" style="max-width:82%;">
-                  <div class="speech-speaker">${line.speaker}</div>
-                  <div class="speech-text">${line.text}</div>
-                  <button class="audio-btn modal-speak-btn" style="margin-top:8px;" data-speak="${escapeAttr(line.text)}">🔊 Listen</button>
-                </div>
-              </div>
-            `
-              )
-              .join("")}
-          </div>
-        `;
-
-        body.querySelectorAll(".modal-speak-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            speakText(btn.getAttribute("data-speak"), btn);
-          });
-        });
-
-        modal.classList.remove("hidden");
+        openDialogueModal(slide.title, dialogueLines);
       });
     }
   } else if (slide.type === "video") {
@@ -632,37 +447,7 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
     const openDialogueBtn = document.getElementById("openDialogueModalBtn");
     if (openDialogueBtn) {
       openDialogueBtn.addEventListener("click", () => {
-        const modal = document.getElementById("reviewModal");
-        const modalTitle = modal.querySelector(".modal-header h3");
-        const body = document.getElementById("reviewModalBody");
-
-        modalTitle.textContent = `📖 ${slide.title} — Dialogue`;
-        body.innerHTML = `
-          <div class="dialogue-list">
-            ${dialogueLines
-              .map(
-                (line, idx) => `
-              <div class="dialogue-row ${idx % 2 === 1 ? "right" : ""}">
-                <div class="speaker-avatar">${line.speaker[0]}</div>
-                <div class="speech-bubble" style="max-width:82%;">
-                  <div class="speech-speaker">${line.speaker}</div>
-                  <div class="speech-text">${line.text}</div>
-                  <button class="audio-btn modal-speak-btn" style="margin-top:8px;" data-speak="${escapeAttr(line.text)}">🔊 Listen</button>
-                </div>
-              </div>
-            `
-              )
-              .join("")}
-          </div>
-        `;
-
-        body.querySelectorAll(".modal-speak-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            speakText(btn.getAttribute("data-speak"), btn);
-          });
-        });
-
-        modal.classList.remove("hidden");
+        openDialogueModal(slide.title, dialogueLines);
       });
     }
   } else if (slide.type === "grammar") {
@@ -781,4 +566,3 @@ function renderCompletionSlide(canvas, slide, lessonMeta) {
 function escapeAttr(str) {
   return String(str).replace(/"/g, "&quot;");
 }
-

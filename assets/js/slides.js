@@ -198,47 +198,35 @@ const SLIDES_BY_LESSON = {
       type: "intro",
       title: "Lesson Introduction"
     },
+{
+    id: "3-2",
+    type: "imageDialogue",
+    title: "Welcome to My House!",
+    subtitle: "Listen to Adam showing his house, rooms, and objects to Sara.",
+    imageUrl: "../assets/images/lesson3-house-tree.jfif",
+    lines: [
+      { speaker: "Sara", text: "Your house is very nice, Adam! What are the rooms?" },
+      { speaker: "Adam", text: "Thanks! Here is the living room with a sofa and a TV, and next to it is the kitchen with a table." },
+      { speaker: "Sara", text: "Where is your bedroom?" },
+      { speaker: "Adam", text: "My bedroom is upstairs. It has a comfortable bed and a lamp. Next to it is the bathroom, and outside we have a small garden with flowers!" }
+    ]
+  },
     {
-      id: "3-2",
-      type: "vocabulary",
-      title: "Rooms in a House",
-      subtitle: "Name the main rooms where we live, cook, and sleep.",
-      items: [
-        { emoji: "🛋️", word: "Living room", example: "We watch TV in the living room." },
-        { emoji: "🍳", word: "Kitchen", example: "My dad cooks dinner in the kitchen." },
-        { emoji: "🛏️", word: "Bedroom", example: "I sleep in my bedroom." },
-        { emoji: "🚿", word: "Bathroom", example: "I wash my face in the bathroom." },
-        { emoji: "🌳", word: "Garden", example: "There are flowers in the garden." }
-      ]
-    },
-    {
-      id: "3-3",
-      type: "vocabulary",
-      title: "Objects at Home",
-      subtitle: "Common furniture and objects inside the house.",
-      items: [
-        { emoji: "🪑", word: "Chair & Table", example: "The book is on the table." },
-        { emoji: "🛏️", word: "Bed", example: "My bed is very comfortable." },
-        { emoji: "🚪", word: "Door & Window", example: "Please open the window." },
-        { emoji: "📺", word: "Television (TV)", example: "The TV is in the living room." },
-        { emoji: "💡", word: "Lamp", example: "Turn on the lamp, please." }
-      ]
-    },
+    id: "3-3",
+    type: "imageDialogue",
+    title: "My Daily Routine",
+    subtitle: "Listen to Adam talking about what he does every day.",
+    imageUrl: "../assets/images/lesson3-routine-tree.jfif",
+    lines: [
+      { speaker: "Sara", text: "What is your daily routine, Adam?" },
+      { speaker: "Adam", text: "In the morning, I wake up at 7 o'clock and wash my face in the bathroom,Then, I eat breakfast in the kitchen and go to school" },
+      { speaker: "Sara", text: "What do you do in the evening?" },
+      { speaker: "Adam", text: "In the evening, I do my homework, watch TV in the living room, and go to sleep at 10 o'clock!" }
+    ]
+  },
+   
     {
       id: "3-4",
-      type: "vocabulary",
-      title: "Daily Routine Actions",
-      subtitle: "Talk about the things you do every day.",
-      items: [
-        { emoji: "⏰", word: "Wake up", example: "I wake up at 7 o'clock." },
-        { emoji: "🥣", word: "Eat breakfast", example: "I eat breakfast at 7:30." },
-        { emoji: "🏫", word: "Go to school / work", example: "I go to school at 8:00." },
-        { emoji: "📚", word: "Study / Do homework", example: "I study English in the afternoon." },
-        { emoji: "😴", word: "Go to bed", example: "I go to bed at 10 o'clock." }
-      ]
-    },
-    {
-      id: "3-5",
       type: "grammar",
       title: "Basic Time Expressions",
       subtitle: "Use 'at' for clock times and 'in the' for parts of the day.",
@@ -253,19 +241,20 @@ const SLIDES_BY_LESSON = {
       tip: "Remember: We say 'in the morning', 'in the afternoon', 'in the evening', but 'at night'!"
     },
     {
-      id: "3-6",
-      type: "dialogue",
+      id: "3-5",
+      type: "imageDialogue",
       title: "My Daily Routine",
-      subtitle: "Listen to Omar describe his typical weekday.",
+      subtitle: "Listen to Samandra describe her typical weekday.",
+      imageUrl: "../assets/images/lesson3-samandra-routine.jfif",
       lines: [
-        { speaker: "Omar", text: "I wake up at 7 o'clock in the morning." },
-        { speaker: "Omar", text: "I eat breakfast in the kitchen at 7:30." },
-        { speaker: "Omar", text: "In the afternoon, I do my homework in my bedroom." },
-        { speaker: "Omar", text: "At night, I watch TV in the living room and go to bed at 10." }
+        { speaker: "Samandra", text: "I wake up at 7 o'clock in the morning." },
+        { speaker: "Samandra", text: "I eat breakfast in the kitchen at 7:30." },
+        { speaker: "Samandra", text: "In the afternoon, I do my homework in my bedroom." },
+        { speaker: "Samandra", text: "At night, I watch TV in the living room and go to bed at 10." }
       ]
     },
     {
-      id: "3-7",
+      id: "3-6",
       type: "activity",
       activityType: "matching",
       title: "Match Rooms & Actions",
@@ -278,7 +267,7 @@ const SLIDES_BY_LESSON = {
       ]
     },
     {
-      id: "3-8",
+      id: "3-7",
       type: "activity",
       activityType: "fillBlank",
       title: "Complete the Daily Routine",
@@ -305,7 +294,7 @@ const SLIDES_BY_LESSON = {
       ]
     },
     {
-      id: "3-9",
+      id: "3-8",
       type: "completion",
       title: "Lesson Completed",
       message: "Great job! You can now describe your home and daily routine in English."
