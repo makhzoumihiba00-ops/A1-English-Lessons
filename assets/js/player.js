@@ -538,53 +538,64 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
       <div></div>
     `;
   } else if (slide.type === "video") {
+    const dialogueLines = slide.lines || (slide.transcript ? [{ speaker: "Dialogue", text: slide.transcript }] : []);
     canvas.innerHTML = `
       <div>
-        <div class="slide-header-bar">
-          <span class="slide-tag">🎬 Video Dialogue</span>
-          <span class="badge-lime">+10 XP</span>
-        </div>
         <h2 class="slide-title">${slide.title}</h2>
         <p class="slide-subtitle">${slide.subtitle}</p>
         <div style="border-radius:18px;overflow:hidden;border:2px solid var(--border-color);background:#000;box-shadow:var(--shadow-md);">
-          <video controls playsinline style="width:100%;max-height:330px;display:block;" poster="${slide.poster || ''}">
+          <video controls playsinline style="width:100%;max-height:270px;display:block;transform:scale(1.12);transform-origin:center center;" poster="${slide.poster || ''}">
             <source src="${slide.videoUrl}" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
-        ${slide.transcript ? `<div class="feedback-banner success" style="margin-top:12px;">💬 ${slide.transcript}</div>` : ""}
+        ${
+          dialogueLines.length
+            ? `<div style="margin-top:14px;display:flex;justify-content:center;">
+                <button class="btn-primary" id="openDialogueModalBtn" style="padding:10px 22px;font-size:0.95rem;">📖 Read Dialogue</button>
+              </div>`
+            : ""
+        }
       </div>
       <div></div>
     `;
-  } else if (slide.type === "dialogue") {
-    const fullDialogue = slide.lines.map((l) => `${l.speaker}: ${l.text}`).join(" ");
-    canvas.innerHTML = `
-      <div>
-        <div class="slide-header-bar">
-          <span class="slide-tag">Conversation Practice</span>
-          <button class="audio-btn" data-speak="${escapeAttr(fullDialogue)}">🔊 Play Full Dialogue</button>
-        </div>
-        <h2 class="slide-title">${slide.title}</h2>
-        <p class="slide-subtitle">${slide.subtitle}</p>
-        <div class="dialogue-list">
-          ${slide.lines
-            .map(
-              (line, idx) => `
-            <div class="dialogue-row ${idx % 2 === 1 ? "right" : ""}">
-              <div class="speaker-avatar">${line.speaker[0]}</div>
-              <div class="speech-bubble">
-                <div class="speech-speaker">${line.speaker}</div>
-                <div class="speech-text">${line.text}</div>
-                <button class="audio-btn" style="margin-top:8px;" data-speak="${escapeAttr(line.text)}">🔊 Listen</button>
+
+    const openDialogueBtn = document.getElementById("openDialogueModalBtn");
+    if (openDialogueBtn) {
+      openDialogueBtn.addEventListener("click", () => {
+        const modal = document.getElementById("reviewModal");
+        const modalTitle = modal.querySelector(".modal-header h3");
+        const body = document.getElementById("reviewModalBody");
+
+        modalTitle.textContent = `📖 ${slide.title} — Dialogue`;
+        body.innerHTML = `
+          <div class="dialogue-list">
+            ${dialogueLines
+              .map(
+                (line, idx) => `
+              <div class="dialogue-row ${idx % 2 === 1 ? "right" : ""}">
+                <div class="speaker-avatar">${line.speaker[0]}</div>
+                <div class="speech-bubble" style="max-width:82%;">
+                  <div class="speech-speaker">${line.speaker}</div>
+                  <div class="speech-text">${line.text}</div>
+                  <button class="audio-btn modal-speak-btn" style="margin-top:8px;" data-speak="${escapeAttr(line.text)}">🔊 Listen</button>
+                </div>
               </div>
-            </div>
-          `
-            )
-            .join("")}
-        </div>
-      </div>
-      <div></div>
-    `;
+            `
+              )
+              .join("")}
+          </div>
+        `;
+
+        body.querySelectorAll(".modal-speak-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            speakText(btn.getAttribute("data-speak"), btn);
+          });
+        });
+
+        modal.classList.remove("hidden");
+      });
+    }
   } else if (slide.type === "grammar") {
     canvas.innerHTML = `
       <div>
