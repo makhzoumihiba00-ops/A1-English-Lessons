@@ -397,3 +397,6 @@ button {
 .visual-pill.lime {
   display: none !important;
 }
+#themeToggle {
+  display: none !important;
+}

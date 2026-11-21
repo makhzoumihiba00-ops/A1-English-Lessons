@@ -227,26 +227,19 @@ function updateHeaderHUD() {
   if (xpEl) xpEl.textContent = `${stats.totalXp} XP`;
   if (lvlEl) lvlEl.textContent = `Lvl ${stats.level} • A1`;
 }
-
 function initThemeToggle() {
-  const state = loadProgressState();
-  if (state.theme === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
-  }
-  const btn = document.getElementById("themeToggle");
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-    const nextTheme = isDark ? "light" : "dark";
-    if (nextTheme === "dark") {
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  const applySystemTheme = (isDark) => {
+    if (isDark) {
       document.documentElement.setAttribute("data-theme", "dark");
     } else {
       document.documentElement.removeAttribute("data-theme");
     }
-    const current = loadProgressState();
-    current.theme = nextTheme;
-    saveProgressState(current);
-  });
+  };
+
+  applySystemTheme(mediaQuery.matches);
+  mediaQuery.addEventListener("change", (e) => applySystemTheme(e.matches));
 }
 
 function initFullscreenToggle() {

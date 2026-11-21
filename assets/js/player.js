@@ -39,16 +39,6 @@ function awardXP(amount, reasonText) {
   state.xp = (state.xp || 0) + amount;
   saveProgressState(state);
   updatePlayerHUD();
-
-  const toast = document.getElementById("xpToast");
-  if (toast) {
-    toast.textContent = `+${amount} XP${reasonText ? " • " + reasonText : ""} ⚡`;
-    toast.classList.remove("hidden");
-    clearTimeout(window._xpToastTimer);
-    window._xpToastTimer = setTimeout(() => {
-      toast.classList.add("hidden");
-    }, 2200);
-  }
 }
 
 function populateLessonDropdown() {
@@ -307,6 +297,13 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
   canvas.style.animation = "slideEnter 0.25s ease";
 
   if (slide.type === "intro") {
+    const introVisual =
+      lessonMeta.id === 5
+        ? getLessonIllustrationSVG(lessonMeta.illustrationKey)
+        : `<div class="slide-intro-photo-wrap" style="border-radius:20px;overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/10;max-width:360px;margin:0 auto;">
+             ${getLessonCardPhoto(lessonMeta, true)}
+           </div>`;
+
     canvas.innerHTML = `
       <div class="slide-header-bar">
         <span class="slide-tag">Slide 1 of ${totalSlides} • Lesson Intro</span>
@@ -314,7 +311,7 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
       </div>
       <div class="cover-slide-layout">
         <div>
-          <span class="badge-lime">🎮 ${lessonMeta.code} • +${lessonMeta.xpReward} XP</span>
+          <span class="badge-lime">🎮 ${lessonMeta.code}</span>
           <h2>${lessonMeta.title}</h2>
           <p class="slide-subtitle">${lessonMeta.intro}</p>
           <ul class="cover-objectives">
@@ -322,7 +319,7 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
           </ul>
         </div>
         <div style="text-align:center;">
-          ${getLessonIllustrationSVG(lessonMeta.illustrationKey)}
+          ${introVisual}
         </div>
       </div>
       <div></div>
@@ -363,7 +360,7 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
           ${
             fullDialogue
               ? `<button class="audio-btn" style="padding:5px 12px;font-size:0.8rem;" data-speak="${escapeAttr(fullDialogue)}">🔊 Listen All</button>`
-              : `<span class="badge-lime">+10 XP</span>`
+              : ``
           }
         </div>
         <h2 class="slide-title" style="font-size:1.35rem;margin-bottom:2px;">${slide.title}</h2>
@@ -506,13 +503,13 @@ function renderCompletionSlide(canvas, slide, lessonMeta) {
   canvas.innerHTML = `
     <div class="completion-card">
       <div class="trophy-circle">🏆</div>
-      <span class="badge-lime">Lesson Completed • +${lessonMeta.xpReward} XP</span>
+      <span class="badge-lime">Lesson Completed</span>
       <h2 style="font-size:1.95rem;color:var(--deep-purple);">${lessonMeta.title} Complete!</h2>
       <div style="font-size:1.65rem;color:#F59E0B;letter-spacing:4px;">${renderStarsString(stars)}</div>
       <p style="color:var(--text-muted);max-width:520px;">${slide.message}</p>
 
       <div class="score-summary-pill">
-        ⚡ Total XP: ${stats.totalXp} XP (Level ${stats.level}) &nbsp;|&nbsp; Practice Score: ${score.correct} / ${score.total}
+        Level ${stats.level} &nbsp;|&nbsp; Practice Score: ${score.correct} / ${score.total}
       </div>
 
       <div class="completion-actions">

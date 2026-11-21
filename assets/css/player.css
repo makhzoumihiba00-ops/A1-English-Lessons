@@ -1220,3 +1220,9 @@
     padding-left: 9px;
   }
 }
+.slide-intro-photo-wrap .lesson-cover-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
