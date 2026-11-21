@@ -56,6 +56,18 @@
   padding: 0;
 }
 
+html,
+body {
+  min-width: 0;
+  width: 100%;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
 body {
   font-family: 'Nunito', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--main-bg);
@@ -103,6 +115,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -110,6 +123,7 @@ button {
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
 }
 
 .brand-logo.engame-logo {
@@ -164,6 +178,7 @@ button {
   font-weight: 800;
   color: var(--deep-purple);
   letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
 }
 
 .brand-subtitle {
@@ -177,6 +192,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 /* Gamification HUD Pills */
@@ -313,12 +329,65 @@ button {
 @media (max-width: 720px) {
   .top-bar {
     padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px 14px;
   }
-  .overall-pill {
+  .brand {
+    flex: 1 1 100%;
+  }
+  .top-actions .overall-pill {
     display: none;
   }
   .brand-title {
     font-size: 0.98rem;
+  }
+  .top-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .gamify-hud {
+    min-width: 0;
+    gap: 6px;
+  }
+  .hud-pill {
+    gap: 4px;
+    padding: 5px 8px;
+    font-size: 0.74rem;
+  }
+  .top-actions .icon-btn {
+    padding: 7px 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .top-bar {
+    padding: 10px 12px;
+  }
+  .brand {
+    gap: 10px;
+  }
+  .brand-row {
+    flex-wrap: wrap;
+    gap: 4px 6px;
+  }
+  .brand-logo.engame-logo {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+  .brand-title {
+    font-size: 0.9rem;
+  }
+  .brand-subtitle {
+    font-size: 0.68rem;
+  }
+  .hud-pill {
+    padding: 5px 6px;
+    font-size: 0.7rem;
+  }
+  .top-actions .icon-btn {
+    padding: 6px;
   }
 }
 

@@ -470,7 +470,7 @@ function renderCurrentSlide(slide, lessonMeta, totalSlides) {
               .map(
                 (row) => `
               <tr>
-                ${row.map((cell, cIdx) => `<td>${cIdx === 0 ? `<strong>${cell}</strong>` : cell}</td>`).join("")}
+                ${row.map((cell, cIdx) => `<td data-label="${escapeAttr(slide.headers[cIdx])}">${cIdx === 0 ? `<strong>${cell}</strong>` : cell}</td>`).join("")}
               </tr>
             `
               )

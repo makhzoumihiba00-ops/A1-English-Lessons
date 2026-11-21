@@ -503,3 +503,170 @@
     padding: 26px;
   }
 }
+
+.lessons-container,
+.lesson-intro-wrapper,
+.lesson-intro-content {
+  min-width: 0;
+}
+
+.achievements-strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.lessons-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 325px), 1fr));
+}
+
+.lesson-card {
+  min-width: 0;
+}
+
+.lesson-card-top {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lesson-card-meta {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.intro-banner > *,
+.intro-banner-text {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.stat-chip {
+  min-width: 0;
+}
+
+@media (max-width: 820px) {
+  .lessons-container {
+    padding: 24px 20px 40px;
+  }
+
+  .lesson-intro-wrapper {
+    padding: 28px 20px;
+  }
+
+  .lesson-intro-content {
+    padding: 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .lessons-container {
+    padding: 18px 14px 32px;
+  }
+
+  .intro-banner {
+    padding: 22px 18px;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .intro-banner-text h2 {
+    font-size: clamp(1.35rem, 6vw, 1.75rem);
+  }
+
+  .banner-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .stat-chip:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .stat-chip {
+    padding: 10px 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-chip strong {
+    font-size: 1.15rem;
+  }
+
+  .achievements-strip {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 9px;
+    margin-bottom: 20px;
+  }
+
+  .achievement-badge {
+    min-width: 0;
+    padding: 10px 12px;
+  }
+
+  .lessons-grid {
+    gap: 16px;
+  }
+
+  .lesson-card {
+    padding: 18px;
+  }
+
+  .lesson-intro-wrapper {
+    padding: 16px 12px;
+    align-items: flex-start;
+  }
+
+  .lesson-intro-card {
+    border-radius: 18px;
+  }
+
+  .lesson-intro-content {
+    padding: 22px 18px;
+  }
+
+  .lesson-intro-content h2 {
+    font-size: clamp(1.5rem, 7vw, 1.9rem);
+    overflow-wrap: anywhere;
+  }
+
+  .objectives-box {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .intro-actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .intro-actions > a {
+    width: 100%;
+  }
+
+  .lesson-intro-visual {
+    padding: 22px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .lessons-container {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .intro-banner {
+    padding: 18px 14px;
+  }
+
+  .lesson-card {
+    padding: 16px;
+  }
+
+  .lesson-card-top {
+    gap: 6px;
+  }
+
+  .lesson-status-tag {
+    overflow-wrap: anywhere;
+  }
+}
