@@ -670,3 +670,51 @@
     overflow-wrap: anywhere;
   }
 }
+.lesson-illustration-box {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.lesson-illustration-box .lesson-cover-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.lesson-illustration-box .xp-reward-pill {
+  position: absolute;
+  z-index: 2;
+}
+.lesson-intro-visual {
+  position: relative;
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 360px;
+}
+
+.lesson-intro-visual .lesson-cover-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+}
+
+.lesson-intro-visual .visual-meta-pills {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  width: 100%;
+  background: linear-gradient(to top, rgba(20, 12, 46, 0.85), transparent);
+  justify-content: center;
+}

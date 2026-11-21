@@ -390,4 +390,10 @@ button {
     padding: 6px;
   }
 }
-
+/* Hide all XP pills and XP counters across the whole project */
+.xp-pill,
+.lime-chip,
+.xp-reward-pill,
+.visual-pill.lime {
+  display: none !important;
+}

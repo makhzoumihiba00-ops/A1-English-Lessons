@@ -91,6 +91,19 @@ const LESSONS_DATA = [
   }
 ];
 
+function getLessonCardPhoto(lesson, isSubPage = false) {
+  const prefix = isSubPage ? "../assets/images/" : "assets/images/";
+  const photos = {
+    greetings: `${prefix}card-lesson-01.jpg.jfif`,
+    family: `${prefix}card-lesson-02.jpg.jfif`,
+    home: `${prefix}card-lesson-03.jpg.jfif`,
+    clothes: `${prefix}card-lesson-04.jpg.jfif`,
+    grammar: `${prefix}card-lesson-05.jpg.jfif`
+  };
+  const src = photos[lesson.illustrationKey] || photos.greetings;
+  return `<img src="${src}" alt="${lesson.title}" class="lesson-cover-photo" loading="lazy" />`;
+}
+
 function getLessonIllustrationSVG(key) {
   const svgs = {
     greetings: `
@@ -328,8 +341,7 @@ function renderLessonsGrid() {
             ${statusBadge}
           </div>
           <div class="lesson-illustration-box">
-            ${getLessonIllustrationSVG(lesson.illustrationKey)}
-            <span class="xp-reward-pill">+${lesson.xpReward} XP</span>
+            ${getLessonCardPhoto(lesson, false)}
           </div>
           <h3>${lesson.title}</h3>
           <p>${lesson.shortDesc}</p>
@@ -412,9 +424,8 @@ function renderLessonIntroduction() {
       </div>
 
       <div class="lesson-intro-visual">
-        ${getLessonIllustrationSVG(lesson.illustrationKey)}
+        ${getLessonCardPhoto(lesson, true)}
         <div class="visual-meta-pills">
-          <span class="visual-pill lime">⚡ +${lesson.xpReward} XP</span>
           <span class="visual-pill">📑 ${lesson.slideCount} Slides</span>
           <span class="visual-pill">⏱ ${lesson.duration}</span>
         </div>
