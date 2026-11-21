@@ -1,25 +1,25 @@
 :root {
-  --primary-purple: #6C4BFF;
-  --primary-purple-hover: #5835F2;
-  --deep-purple: #3A236F;
-  --lavender-bg: #F4F0FF;
-  --lavender-hover: #E8E0FF;
+  --primary-purple: #19A991;
+  --primary-purple-hover: #128C78;
+  --deep-purple: #126E62;
+  --lavender-bg: #E8F7F4;
+  --lavender-hover: #D6F1EC;
   --lime-green: #B8FF4A;
   --lime-green-hover: #A6F52E;
   --soft-green: #DFFF9A;
-  --main-bg: #FCFAFF;
+  --main-bg: #FAFDFC;
   --bg-surface: #FFFFFF;
   --text-main: #201A2B;
-  --text-muted: #655C78;
-  --border-color: #E2D9FF;
+  --text-muted: #5B6E69;
+  --border-color: #CDEAE4;
   --red-accent: #FF4D6D;
   --red-soft: #FFE4EA;
   --green-success: #16A34A;
   --green-soft: #DCFCE7;
 
-  --shadow-sm: 0 3px 10px rgba(58, 35, 111, 0.06);
-  --shadow-md: 0 10px 26px rgba(58, 35, 111, 0.10);
-  --shadow-lg: 0 18px 40px rgba(58, 35, 111, 0.15);
+  --shadow-sm: 0 3px 10px rgba(18, 110, 98, 0.06);
+  --shadow-md: 0 10px 26px rgba(18, 110, 98, 0.10);
+  --shadow-lg: 0 18px 40px rgba(18, 110, 98, 0.15);
   --radius-sm: 12px;
   --radius-md: 18px;
   --radius-lg: 24px;
@@ -27,19 +27,19 @@
 }
 
 [data-theme="dark"] {
-  --primary-purple: #8468FF;
-  --primary-purple-hover: #977FFF;
-  --deep-purple: #F5F2FF;
-  --lavender-bg: #1F1836;
-  --lavender-hover: #2A2047;
+  --primary-purple: #49BFAE;
+  --primary-purple-hover: #68D0C0;
+  --deep-purple: #E8F6F3;
+  --lavender-bg: #18342F;
+  --lavender-hover: #244841;
   --lime-green: #B8FF4A;
   --lime-green-hover: #C8FF70;
   --soft-green: rgba(184, 255, 74, 0.18);
-  --main-bg: #120D21;
-  --bg-surface: #19132E;
-  --text-main: #F6F3FF;
-  --text-muted: #B2A8CC;
-  --border-color: #312654;
+  --main-bg: #0D1917;
+  --bg-surface: #14221F;
+  --text-main: #F4FAF8;
+  --text-muted: #A6C8C0;
+  --border-color: #31534C;
   --red-accent: #FF6B86;
   --red-soft: rgba(255, 77, 109, 0.2);
   --green-success: #4ADE80;
@@ -130,12 +130,12 @@ button {
   width: 46px;
   height: 46px;
   border-radius: 15px;
-  background: linear-gradient(135deg, #3A236F 0%, #6C4BFF 100%);
+  background: linear-gradient(135deg, #126E62 0%, #137265 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: 0 6px 16px rgba(108, 75, 255, 0.35);
+  box-shadow: 0 6px 16px rgba(25, 169, 145, 0.35);
 }
 
 .brand-logo.engame-logo::after {
@@ -163,7 +163,7 @@ button {
 }
 
 .engame-tag {
-  background: linear-gradient(135deg, #6C4BFF, #3A236F);
+  background: linear-gradient(135deg, #137265, #126E62);
   color: #B8FF4A;
   font-size: 0.72rem;
   font-weight: 800;
@@ -226,7 +226,7 @@ button {
 
 .level-pill {
   background: var(--lavender-bg);
-  color: var(--primary-purple);
+  color: var(--deep-purple);
 }
 
 .icon-btn {
@@ -269,7 +269,7 @@ button {
   font-size: 0.76rem;
   font-weight: 800;
   background: var(--lavender-bg);
-  color: var(--primary-purple);
+  color: var(--deep-purple);
   border: 1px solid var(--border-color);
 }
 
@@ -286,14 +286,14 @@ button {
   font-weight: 800;
   font-size: 0.94rem;
   border: 2px solid #9EE82C;
-  box-shadow: 0 5px 0 #84C91C, 0 8px 18px rgba(108, 75, 255, 0.16);
+  box-shadow: 0 5px 0 #84C91C, 0 8px 18px rgba(25, 169, 145, 0.16);
   transition: all 0.16s ease;
 }
 
 .btn-primary:hover {
   background: var(--lime-green-hover);
   transform: translateY(-2px);
-  box-shadow: 0 7px 0 #84C91C, 0 12px 22px rgba(108, 75, 255, 0.22);
+  box-shadow: 0 7px 0 #84C91C, 0 12px 22px rgba(25, 169, 145, 0.22);
 }
 
 .btn-primary:active {

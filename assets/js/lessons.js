@@ -108,52 +108,52 @@ function getLessonIllustrationSVG(key) {
   const svgs = {
     greetings: `
       <svg viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="18" y="16" width="224" height="128" rx="20" fill="#F4F0FF"/>
-        <circle cx="82" cy="68" r="22" fill="#3A236F"/>
-        <path d="M52 132C52 112 65 98 82 98C99 98 112 112 112 132" fill="#6C4BFF"/>
-        <circle cx="178" cy="68" r="22" fill="#6C4BFF"/>
-        <path d="M148 132C148 112 161 98 178 98C195 98 208 112 208 132" fill="#3A236F"/>
+        <rect x="18" y="16" width="224" height="128" rx="20" fill="#E8F7F4"/>
+        <circle cx="82" cy="68" r="22" fill="#126E62"/>
+        <path d="M52 132C52 112 65 98 82 98C99 98 112 112 112 132" fill="#19A991"/>
+        <circle cx="178" cy="68" r="22" fill="#19A991"/>
+        <path d="M148 132C148 112 161 98 178 98C195 98 208 112 208 132" fill="#126E62"/>
         <rect x="92" y="22" width="76" height="30" rx="15" fill="#B8FF4A"/>
         <text x="130" y="41" text-anchor="middle" fill="#201A2B" font-family="Poppins, sans-serif" font-weight="800" font-size="13">Hello! 👋</text>
       </svg>`,
     family: `
       <svg viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="18" y="16" width="224" height="128" rx="20" fill="#F4F0FF"/>
-        <circle cx="72" cy="64" r="18" fill="#3A236F"/>
-        <path d="M48 130C48 112 58 98 72 98C86 98 96 112 96 130" fill="#6C4BFF"/>
-        <circle cx="188" cy="64" r="18" fill="#6C4BFF"/>
-        <path d="M164 130C164 112 174 98 188 98C202 98 212 112 212 130" fill="#3A236F"/>
+        <rect x="18" y="16" width="224" height="128" rx="20" fill="#E8F7F4"/>
+        <circle cx="72" cy="64" r="18" fill="#126E62"/>
+        <path d="M48 130C48 112 58 98 72 98C86 98 96 112 96 130" fill="#19A991"/>
+        <circle cx="188" cy="64" r="18" fill="#19A991"/>
+        <path d="M164 130C164 112 174 98 188 98C202 98 212 112 212 130" fill="#126E62"/>
         <circle cx="130" cy="80" r="14" fill="#B8FF4A"/>
-        <path d="M110 130C110 116 118 106 130 106C142 106 150 116 150 130" fill="#8468FF"/>
-        <path d="M130 30L135 41L147 41L137 48L141 59L130 52L119 59L123 48L113 41L125 41Z" fill="#B8FF4A" stroke="#3A236F" stroke-width="1.5"/>
+        <path d="M110 130C110 116 118 106 130 106C142 106 150 116 150 130" fill="#49BFAE"/>
+        <path d="M130 30L135 41L147 41L137 48L141 59L130 52L119 59L123 48L113 41L125 41Z" fill="#B8FF4A" stroke="#126E62" stroke-width="1.5"/>
       </svg>`,
     home: `
       <svg viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="18" y="16" width="224" height="128" rx="20" fill="#F4F0FF"/>
-        <polygon points="130,26 64,76 196,76" fill="#6C4BFF"/>
-        <rect x="80" y="76" width="100" height="60" rx="8" fill="#FFFFFF" stroke="#3A236F" stroke-width="3"/>
-        <rect x="118" y="98" width="24" height="38" rx="4" fill="#3A236F"/>
+        <rect x="18" y="16" width="224" height="128" rx="20" fill="#E8F7F4"/>
+        <polygon points="130,26 64,76 196,76" fill="#19A991"/>
+        <rect x="80" y="76" width="100" height="60" rx="8" fill="#FFFFFF" stroke="#126E62" stroke-width="3"/>
+        <rect x="118" y="98" width="24" height="38" rx="4" fill="#126E62"/>
         <rect x="90" y="90" width="18" height="18" rx="4" fill="#B8FF4A"/>
         <rect x="152" y="90" width="18" height="18" rx="4" fill="#B8FF4A"/>
       </svg>`,
     clothes: `
       <svg viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="18" y="16" width="224" height="128" rx="20" fill="#F4F0FF"/>
-        <path d="M74 46L98 34H122L146 46L134 68L122 62V124H98V62L86 68L74 46Z" fill="#6C4BFF"/>
-        <path d="M154 54H186L194 124H146L154 54Z" fill="#B8FF4A" stroke="#3A236F" stroke-width="2"/>
+        <rect x="18" y="16" width="224" height="128" rx="20" fill="#E8F7F4"/>
+        <path d="M74 46L98 34H122L146 46L134 68L122 62V124H98V62L86 68L74 46Z" fill="#19A991"/>
+        <path d="M154 54H186L194 124H146L154 54Z" fill="#B8FF4A" stroke="#126E62" stroke-width="2"/>
         <circle cx="110" cy="42" r="7" fill="#DFFF9A"/>
       </svg>`,
     grammar: `
       <svg viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="18" y="16" width="224" height="128" rx="20" fill="#F4F0FF"/>
-        <rect x="44" y="36" width="52" height="34" rx="10" fill="#3A236F"/>
+        <rect x="18" y="16" width="224" height="128" rx="20" fill="#E8F7F4"/>
+        <rect x="44" y="36" width="52" height="34" rx="10" fill="#126E62"/>
         <text x="70" y="57" text-anchor="middle" fill="#FFFFFF" font-family="Poppins, sans-serif" font-weight="800" font-size="13">I / She</text>
-        <rect x="104" y="36" width="52" height="34" rx="10" fill="#6C4BFF"/>
-        <text x="130" y="57" text-anchor="middle" fill="#FFFFFF" font-family="Poppins, sans-serif" font-weight="800" font-size="13">am / is</text>
+        <rect x="104" y="36" width="52" height="34" rx="10" fill="#19A991"/>
+        <text x="130" y="57" text-anchor="middle" fill="#201A2B" font-family="Poppins, sans-serif" font-weight="800" font-size="13">am / is</text>
         <rect x="164" y="36" width="52" height="34" rx="10" fill="#B8FF4A"/>
         <text x="190" y="57" text-anchor="middle" fill="#201A2B" font-family="Poppins, sans-serif" font-weight="800" font-size="13">a / an</text>
-        <rect x="60" y="86" width="140" height="36" rx="12" fill="#FFFFFF" stroke="#6C4BFF" stroke-width="2"/>
-        <text x="130" y="109" text-anchor="middle" fill="#3A236F" font-family="Poppins, sans-serif" font-weight="800" font-size="13">I am happy. ⚡</text>
+        <rect x="60" y="86" width="140" height="36" rx="12" fill="#FFFFFF" stroke="#19A991" stroke-width="2"/>
+        <text x="130" y="109" text-anchor="middle" fill="#126E62" font-family="Poppins, sans-serif" font-weight="800" font-size="13">I am happy. ⚡</text>
       </svg>`
   };
   return svgs[key] || svgs.greetings;

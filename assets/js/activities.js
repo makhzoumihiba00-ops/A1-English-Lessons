@@ -1258,7 +1258,7 @@ function renderSentenceBuilderActivity(canvas, slide, lessonId) {
     zone.innerHTML = chosen
       .map(
         (item, pos) => `
-        <button class="word-chip" style="background:var(--primary-purple);color:#fff;" data-remove-sidx="${sIdx}" data-pos="${pos}">
+        <button class="word-chip" style="background:var(--primary-purple);color:#201A2B;" data-remove-sidx="${sIdx}" data-pos="${pos}">
           ${item.word} ✕
         </button>
       `

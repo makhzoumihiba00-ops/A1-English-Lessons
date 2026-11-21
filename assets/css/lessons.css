@@ -26,7 +26,7 @@
 }
 
 .intro-banner {
-  background: linear-gradient(135deg, #3A236F 0%, #6C4BFF 100%);
+  background: linear-gradient(135deg, #126E62 0%, #137265 100%);
   color: #FFFFFF;
   border-radius: var(--radius-lg);
   padding: 28px 34px;
@@ -74,7 +74,7 @@
 }
 
 .intro-banner-text p {
-  color: #EDE8FF;
+  color: #E5F5F2;
   font-size: 0.96rem;
   max-width: 560px;
 }
@@ -114,7 +114,7 @@
 
 .stat-chip span {
   font-size: 0.75rem;
-  color: #E8E0FF;
+  color: #D9F5EF;
   font-weight: 700;
 }
 
@@ -158,7 +158,7 @@
 }
 
 .achievement-badge.unlocked .ach-icon {
-  background: #3A236F;
+  background: var(--deep-purple);
 }
 
 .ach-info strong {
@@ -218,7 +218,7 @@
   padding: 5px 12px;
   border-radius: 999px;
   background: var(--lavender-bg);
-  color: var(--primary-purple);
+  color: var(--deep-purple);
 }
 
 .lesson-stars {
@@ -245,8 +245,8 @@
 }
 
 .status-inprogress {
-  background: #EDE8FF;
-  color: #6C4BFF;
+  background: var(--lavender-bg);
+  color: var(--deep-purple);
 }
 
 .status-new {
@@ -257,7 +257,7 @@
 .lesson-illustration-box {
   height: 152px;
   border-radius: var(--radius-md);
-  background: linear-gradient(160deg, var(--lavender-bg) 0%, #E7DFFF 100%);
+  background: linear-gradient(160deg, var(--lavender-bg) 0%, #D2EEE8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -268,7 +268,7 @@
 }
 
 [data-theme="dark"] .lesson-illustration-box {
-  background: linear-gradient(160deg, #251C42 0%, #312457 100%);
+  background: linear-gradient(160deg, #142923 0%, #1D3933 100%);
 }
 
 .lesson-illustration-box svg {
@@ -281,7 +281,7 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background: #3A236F;
+  background: var(--deep-purple);
   color: #B8FF4A;
   font-size: 0.72rem;
   font-weight: 800;
@@ -405,7 +405,7 @@
   font-size: 0.88rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--primary-purple);
+  color: var(--deep-purple);
   margin-bottom: 12px;
 }
 
@@ -430,7 +430,7 @@
   height: 22px;
   border-radius: 50%;
   background: var(--primary-purple);
-  color: #B8FF4A;
+  color: #201A2B;
   font-size: 0.75rem;
   font-weight: 900;
   display: inline-flex;
@@ -448,7 +448,7 @@
 }
 
 .lesson-intro-visual {
-  background: linear-gradient(155deg, #3A236F 0%, #6C4BFF 100%);
+  background: linear-gradient(155deg, #126E62 0%, #137265 100%);
   padding: 34px;
   display: flex;
   flex-direction: column;
